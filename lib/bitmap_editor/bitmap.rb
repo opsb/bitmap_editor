@@ -14,8 +14,9 @@ class Bitmap
     ensure_bounded_x!(x)
     ensure_bounded_y!(y)
 
-    @rows[x - 1][y - 1] = color
-    self
+    update do
+      @rows[x - 1][y - 1] = color
+    end
   end
 
   def draw_vertical_segment(x:, y1:, y2:, color:)
@@ -42,5 +43,15 @@ class Bitmap
 
   def ensure_bounded_y!(y)
     raise "Invalid y: #{y}" unless 0 < y && y <= @height
+  end
+
+  def update(&block)
+    deep_clone.tap do |clone|
+      clone.instance_eval(&block)
+    end
+  end
+
+  def deep_clone
+    Marshal.load(Marshal.dump(self))
   end
 end

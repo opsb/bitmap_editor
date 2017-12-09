@@ -27,7 +27,7 @@ class BitmapEditor
 
           when /L ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])/
             when_bitmap do
-              @bitmap.color_pixel(x: $1.to_i, y: $2.to_i, color: $3)
+              @bitmap = @bitmap.color_pixel(x: $1.to_i, y: $2.to_i, color: $3)
             end
 
           when /L/
@@ -35,7 +35,7 @@ class BitmapEditor
 
           when /V ([1-9][0-9]*) ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])/
             when_bitmap do
-              @bitmap.draw_vertical_segment(x: $1.to_i, y1: $2.to_i, y2: $3.to_i, color: $4)
+              @bitmap = @bitmap.draw_vertical_segment(x: $1.to_i, y1: $2.to_i, y2: $3.to_i, color: $4)
             end
 
           when /V/
@@ -43,7 +43,7 @@ class BitmapEditor
 
           when /H ([1-9][0-9]*) ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])/
             when_bitmap do
-              @bitmap.draw_horizontal_segment(x1: $1.to_i, x2: $2.to_i, y: $3.to_i, color: $4)
+              @bitmap = @bitmap.draw_horizontal_segment(x1: $1.to_i, x2: $2.to_i, y: $3.to_i, color: $4)
             end
 
           when /H/

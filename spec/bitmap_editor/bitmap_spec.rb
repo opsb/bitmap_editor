@@ -79,4 +79,12 @@ describe Bitmap do
       )
     end
   end
+
+  describe "immutability" do
+    specify do
+      blank_bitmap = Bitmap.new(width: 6, height: 6)
+      with_pixel = blank_bitmap.color_pixel(x: 1, y: 3, color: "A")
+      expect(with_pixel.to_s).to_not eq(blank_bitmap.to_s)
+    end
+  end
 end
