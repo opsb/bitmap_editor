@@ -6,7 +6,7 @@ describe BitmapEditor do
     describe description do
       specify do
         output = StringIO.new
-        BitmapEditor.new.process_commands(commands, output)
+        BitmapEditor::CommandProcessor.new(output).process(commands)
 
         expect(output.string).to eq(expected)
       end
