@@ -2,13 +2,13 @@ require 'pry'
 
 class Bitmap
   def initialize(width:, height:)
-    @rows = (1..height).map do
-      Array.new(width, 'O')
+    @rows = (1..width).map do
+      Array.new(height, 'O')
     end
   end
 
   def color_pixel(x:, y:, color:)
-    @rows[y - 1][x - 1] = color
+    @rows[x - 1][y - 1] = color
     self
   end
 
@@ -25,6 +25,6 @@ class Bitmap
   end
 
   def to_s
-    @rows.map{ |row| row.join }.join("\n")
+    @rows.transpose.map{ |row| row.join }.join("\n")
   end
 end
