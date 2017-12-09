@@ -3,21 +3,38 @@ require "bitmap_editor/bitmap"
 
 describe Bitmap do
   describe :color_pixel do
-    subject(:bitmap) do
-      Bitmap.new(width: 6, height: 4)
-        .color_pixel(x: 1, y: 3, color: "A")
+    let(:blank_bitmap) { Bitmap.new(width: 6, height: 4) }
+
+    context "for valid coordinates" do
+      subject(:bitmap) { blank_bitmap.color_pixel(x: 1, y: 3, color: "A") }
+
+      specify do
+        expect(subject.to_s).to eq(
+          <<~BITMAP
+            OOOOOO
+            OOOOOO
+            AOOOOO
+            OOOOOO
+          BITMAP
+          .strip
+        )
+      end
     end
 
-    specify do
-      expect(subject.to_s).to eq(
-        <<~BITMAP
-          OOOOOO
-          OOOOOO
-          AOOOOO
-          OOOOOO
-        BITMAP
-        .strip
-      )
+    context "for invalid x" do
+      specify do
+        expect {
+          blank_bitmap.color_pixel(x: 10, y: 3, color: "A")
+        }.to raise_error("Invalid x: 10")
+      end
+    end
+
+    context "for invalid y" do
+      specify do
+        expect {
+          blank_bitmap.color_pixel(x: 5, y: 10, color: "A")
+        }.to raise_error("Invalid y: 10")
+      end
     end
   end
 

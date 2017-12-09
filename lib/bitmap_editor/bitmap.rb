@@ -2,12 +2,18 @@ require 'pry'
 
 class Bitmap
   def initialize(width:, height:)
+    @width = width
+    @height = height
+
     @rows = (1..width).map do
       Array.new(height, 'O')
     end
   end
 
   def color_pixel(x:, y:, color:)
+    ensure_bounded_x!(x)
+    ensure_bounded_y!(y)
+
     @rows[x - 1][y - 1] = color
     self
   end
@@ -26,5 +32,15 @@ class Bitmap
 
   def to_s
     @rows.transpose.map{ |row| row.join }.join("\n")
+  end
+
+  private
+
+  def ensure_bounded_x!(x)
+    raise "Invalid x: #{x}" unless 0 < x && x <= @width
+  end
+
+  def ensure_bounded_y!(y)
+    raise "Invalid y: #{y}" unless 0 < y && y <= @height
   end
 end
