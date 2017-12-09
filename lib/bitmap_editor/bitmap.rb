@@ -7,7 +7,12 @@ class Bitmap
     end
   end
 
+  def color_pixel(x:, y:, color:)
+    @rows[y - 1][x - 1] = color
+    self
+  end
+
   def to_s
-    @rows.reverse.map{ |row| row.join }.join("\n")
+    @rows.map{ |row| row.join }.join("\n")
   end
 end

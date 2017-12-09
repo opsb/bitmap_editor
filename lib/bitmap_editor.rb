@@ -14,6 +14,12 @@ class BitmapEditor
       case command
         when /I ([1-9][0-9]*) ([1-9][0-9]*)/
           @bitmap = Bitmap.new(width: $1.to_i, height: $2.to_i)
+        when /L ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])/
+          if @bitmap
+            @bitmap.color_pixel(x: $1.to_i, y: $2.to_i, color: $3)
+          else
+            out.puts "There is no image"
+          end
         when 'S'
           if @bitmap
             out.puts @bitmap.to_s

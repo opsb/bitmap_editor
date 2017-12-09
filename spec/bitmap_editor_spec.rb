@@ -35,4 +35,18 @@ describe BitmapEditor do
       OOOOOO
     OUTPUT
   )
+
+  example("color a pixel",
+    commands: [
+      "I 6 3",
+      "L 1 3 A",
+      "S"
+    ],
+
+    expected: <<~OUTPUT
+      OOOOOO
+      OOOOOO
+      AOOOOO
+    OUTPUT
+  )
 end
