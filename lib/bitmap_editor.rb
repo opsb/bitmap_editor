@@ -27,6 +27,10 @@ class BitmapEditor
             when_bitmap do
               @bitmap.draw_vertical_segment(x: $1.to_i, y1: $2.to_i, y2: $3.to_i, color: $4)
             end
+          when /H ([1-9][0-9]*) ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])/
+            when_bitmap do
+              @bitmap.draw_horizontal_segment(x1: $1.to_i, x2: $2.to_i, y: $3.to_i, color: $4)
+            end
           when 'S'
             when_bitmap do
               @out.puts @bitmap.to_s

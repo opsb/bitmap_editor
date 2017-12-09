@@ -66,4 +66,21 @@ describe BitmapEditor do
       OOOOOO
     OUTPUT
   )
+
+  example("draw a horizontal segment",
+    commands: [
+      "I 6 6",
+      "H 2 5 2 F",
+      "S"
+    ],
+
+    expected: <<~OUTPUT
+      OOOOOO
+      OFFFFO
+      OOOOOO
+      OOOOOO
+      OOOOOO
+      OOOOOO
+    OUTPUT
+  )
 end

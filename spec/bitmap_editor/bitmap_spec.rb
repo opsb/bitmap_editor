@@ -41,4 +41,25 @@ describe Bitmap do
       )
     end
   end
+
+  describe :draw_horizontal_segment do
+    subject(:bitmap) do
+      Bitmap.new(width: 6, height: 6)
+        .draw_horizontal_segment(y: 1, x1: 1, x2: 4, color: "A")
+    end
+
+    specify do
+      expect(subject.to_s).to eq(
+        <<~BITMAP
+          AAAAOO
+          OOOOOO
+          OOOOOO
+          OOOOOO
+          OOOOOO
+          OOOOOO
+        BITMAP
+        .strip
+      )
+    end
+  end
 end
