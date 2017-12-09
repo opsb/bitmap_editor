@@ -10,6 +10,10 @@ class Bitmap
     end
   end
 
+  def clear
+    Bitmap.new(width: @width, height: @height)
+  end
+
   def color_pixel(x:, y:, color:)
     ensure_bounded_x!(x)
     ensure_bounded_y!(y)

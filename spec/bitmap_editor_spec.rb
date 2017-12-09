@@ -55,6 +55,21 @@ describe BitmapEditor do
     OUTPUT
   )
 
+  example("clear bitmap",
+    commands: [
+      "I 6 3",
+      "L 1 3 A",
+      "C",
+      "S"
+    ],
+
+    expected: <<~OUTPUT
+      OOOOOO
+      OOOOOO
+      OOOOOO
+    OUTPUT
+  )
+
   example("draw a vertical segment",
     commands: [
       "I 6 6",

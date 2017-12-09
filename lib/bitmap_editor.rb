@@ -22,6 +22,11 @@ class BitmapEditor
           when /I ([1-9][0-9]*) ([1-9][0-9]*)/
             @bitmap = Bitmap.new(width: $1.to_i, height: $2.to_i)
 
+          when /C/
+            when_bitmap do
+              @bitmap = @bitmap.clear
+            end
+
           when /I/
             fail_with_usage!(command, "I M N - Create a new M x N image with all pixels coloured white (O)")
 

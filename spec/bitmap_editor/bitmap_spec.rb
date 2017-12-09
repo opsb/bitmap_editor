@@ -38,6 +38,28 @@ describe Bitmap do
     end
   end
 
+  describe :clear do
+    subject(:bitmap) do
+      Bitmap.new(width: 6, height: 6)
+        .draw_vertical_segment(x: 1, y1: 1, y2: 4, color: "A")
+        .clear
+    end
+
+    specify do
+      expect(subject.to_s).to eq(
+        <<~BITMAP
+          OOOOOO
+          OOOOOO
+          OOOOOO
+          OOOOOO
+          OOOOOO
+          OOOOOO
+        BITMAP
+        .strip
+      )
+    end
+  end
+
   describe :draw_vertical_segment do
     subject(:bitmap) do
       Bitmap.new(width: 6, height: 6)
