@@ -1,7 +1,13 @@
 require 'pry'
 
 class Bitmap
+  MAXIMUM_WIDTH = 250
+  MAXIMUM_HEIGHT = 250
+
   def initialize(width:, height:)
+    raise "Width exceeds maximum of #{MAXIMUM_WIDTH}" unless width <= MAXIMUM_WIDTH
+    raise "Height exceeds maximum of #{MAXIMUM_HEIGHT}" unless height <= MAXIMUM_HEIGHT
+
     @width = width
     @height = height
 
@@ -42,11 +48,11 @@ class Bitmap
   private
 
   def ensure_bounded_x!(x)
-    raise "Invalid x: #{x}" unless 0 < x && x <= @width
+    raise "Invalid x: #{x}" unless 0 < x && x <= @width && x <= MAXIMUM_WIDTH
   end
 
   def ensure_bounded_y!(y)
-    raise "Invalid y: #{y}" unless 0 < y && y <= @height
+    raise "Invalid y: #{y}" unless 0 < y && y <= @height && y <= MAXIMUM_HEIGHT
   end
 
   def update(&block)

@@ -2,6 +2,34 @@ require "spec_helper"
 require "bitmap_editor/bitmap"
 
 describe Bitmap do
+  describe :new do
+    context "for a valid size" do
+      specify do
+        expect(Bitmap.new(width: 6, height: 4).to_s).to eq(
+          <<~BITMAP
+            OOOOOO
+            OOOOOO
+            OOOOOO
+            OOOOOO
+          BITMAP
+          .strip
+        )
+      end
+    end
+
+    specify do
+      expect {
+        Bitmap.new(width: 400, height: 4)
+      }.to raise_error("Width exceeds maximum of 250")
+    end
+
+    specify do
+      expect {
+        Bitmap.new(width: 6, height: 400)
+      }.to raise_error("Height exceeds maximum of 250")
+    end
+  end
+
   describe :color_pixel do
     let(:blank_bitmap) { Bitmap.new(width: 6, height: 4) }
 
