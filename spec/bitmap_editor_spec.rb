@@ -49,4 +49,21 @@ describe BitmapEditor do
       AOOOOO
     OUTPUT
   )
+
+  example("draw a vertical segment",
+    commands: [
+      "I 6 6",
+      "V 2 2 5 F",
+      "S"
+    ],
+
+    expected: <<~OUTPUT
+      OOOOOO
+      OFOOOO
+      OFOOOO
+      OFOOOO
+      OFOOOO
+      OOOOOO
+    OUTPUT
+  )
 end
