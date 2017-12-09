@@ -6,9 +6,14 @@ describe BitmapEditor do
     describe description do
       specify do
         output = StringIO.new
-        BitmapEditor::CommandProcessor.new(output).process(commands)
 
-        expect(output.string).to eq(expected)
+        Tempfile.create("commands") do |file|
+          file.write(commands.join("\n"))
+          file.rewind
+          BitmapEditor.new.run(file, output)
+
+          expect(output.string).to eq(expected)
+        end
       end
     end
   end

@@ -2,11 +2,11 @@ require "bitmap_editor/bitmap"
 
 class BitmapEditor
 
-  def run(file)
+  def run(file, out = STDOUT)
     return puts "please provide correct file" if file.nil? || !File.exists?(file)
 
     commands = File.open(file).map(&:chomp)
-    CommandProcessor.new(STDOUT).process(commands)
+    CommandProcessor.new(out).process(commands)
   end
 
   class CommandProcessor
