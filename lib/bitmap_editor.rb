@@ -3,10 +3,12 @@ require "bitmap_editor/bitmap"
 class BitmapEditor
 
   def run(file, out = STDOUT)
-    return puts "please provide correct file" if file.nil? || !File.exists?(file)
+    raise "please provide correct file" if file.nil? || !File.exists?(file)
 
     commands = File.open(file).map(&:chomp)
     CommandProcessor.new(out).process(commands)
+  rescue => e
+    out.puts e.message
   end
 
   class CommandProcessor
@@ -36,7 +38,7 @@ class BitmapEditor
               @out.puts @bitmap.to_s
             end
           else
-            @out.puts "unrecognised command :("
+            raise "unrecognised command :("
         end
       end
     end
@@ -45,7 +47,7 @@ class BitmapEditor
       if @bitmap
         yield
       else
-        @out.puts "There is no image"
+        raise "There is no image"
       end
     end
   end

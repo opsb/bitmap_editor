@@ -107,4 +107,28 @@ describe BitmapEditor do
       OWOOO
     OUTPUT
   )
+
+  example("fail fast when command is attempted before image has been created",
+    commands: [
+      "S",
+      "I 6 6",
+      "S"
+    ],
+
+    expected: <<~OUTPUT
+      There is no image
+    OUTPUT
+  )
+
+  example("fail fast when command is not recognised",
+    commands: [
+      "Boom",
+      "I 6 6",
+      "S"
+    ],
+
+    expected: <<~OUTPUT
+      unrecognised command :(
+    OUTPUT
+  )
 end
