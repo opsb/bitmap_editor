@@ -83,4 +83,23 @@ describe BitmapEditor do
       OOOOOO
     OUTPUT
   )
+
+  example("from technical test document",
+    commands: [
+      "I 5 6",
+      "L 1 3 A",
+      "V 2 3 6 W",
+      "H 3 5 2 Z",
+      "S"
+    ],
+
+    expected: <<~OUTPUT
+      OOOOO
+      OOZZZ
+      AWOOO
+      OWOOO
+      OWOOO
+      OWOOO
+    OUTPUT
+  )
 end
